@@ -1,14 +1,52 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Cargar preferencia guardada
+    const saved = localStorage.getItem('darkMode');
+    if (saved) {
+      setDarkMode(saved === 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    // Guardar preferencia
+    localStorage.setItem('darkMode', darkMode.toString());
+    
+    // Aplicar clase al documento
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#F7F7F7] via-white to-[#E8F5E0] text-gray-900 overflow-hidden">
+    <main className={`relative min-h-screen ${
+      darkMode 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100' 
+        : 'bg-gradient-to-br from-[#F7F7F7] via-white to-[#E8F5E0] text-gray-900'
+    } overflow-hidden transition-colors duration-300`}>
       
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#7DBA4F] rounded-full blur-3xl opacity-10 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#4A7F2E] rounded-full blur-3xl opacity-10 animate-pulse" style={{animationDelay: '1s'}}></div>
+      <div className={`absolute top-0 right-0 w-96 h-96 ${
+        darkMode ? 'bg-[#5A9F3E]' : 'bg-[#7DBA4F]'
+      } rounded-full blur-3xl opacity-10 animate-pulse`}></div>
+      <div className={`absolute bottom-0 left-0 w-80 h-80 ${
+        darkMode ? 'bg-[#3A6F1E]' : 'bg-[#4A7F2E]'
+      } rounded-full blur-3xl opacity-10 animate-pulse`} style={{animationDelay: '1s'}}></div>
 
       {/* HEADER */}
-      <header className="w-full px-6 md:px-10 py-6 flex items-center justify-between z-20 relative backdrop-blur-sm bg-white/70 shadow-sm">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-[#4A7F2E] tracking-wide flex items-center gap-2">
+      <header className={`w-full px-6 md:px-10 py-6 flex items-center justify-between z-20 relative backdrop-blur-sm ${
+        darkMode ? 'bg-gray-900/70' : 'bg-white/70'
+      } shadow-sm transition-colors duration-300`}>
+        <h1 className={`text-2xl md:text-3xl font-extrabold ${
+          darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+        } tracking-wide flex items-center gap-2`}>
           <img
             src="/logo.jpg"
             alt="NouCampAnimeArt Logo"
@@ -17,18 +55,43 @@ export default function Home() {
           NouCampAnimeArt
         </h1>
 
-        <nav className="hidden md:flex gap-8 text-lg font-medium text-gray-700">
-          <a href="#servicios" className="hover:text-[#4A7F2E] transition-all hover:scale-110">Servicios</a>
-          <a href="#productos" className="hover:text-[#4A7F2E] transition-all hover:scale-110">Productos</a>
-          <a href="#contacto" className="hover:text-[#4A7F2E] transition-all hover:scale-110">Contacto</a>
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex gap-8 text-lg font-medium">
+            <a href="#servicios" className={`${
+              darkMode ? 'text-gray-300 hover:text-[#7DBA4F]' : 'text-gray-700 hover:text-[#4A7F2E]'
+            } transition-all hover:scale-110`}>Servicios</a>
+            <a href="#productos" className={`${
+              darkMode ? 'text-gray-300 hover:text-[#7DBA4F]' : 'text-gray-700 hover:text-[#4A7F2E]'
+            } transition-all hover:scale-110`}>Productos</a>
+            <a href="#contacto" className={`${
+              darkMode ? 'text-gray-300 hover:text-[#7DBA4F]' : 'text-gray-700 hover:text-[#4A7F2E]'
+            } transition-all hover:scale-110`}>Contacto</a>
+          </nav>
+
+          {/* Toggle Dark Mode */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className={`p-3 rounded-full ${
+              darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'
+            } transition-all transform hover:scale-110 shadow-md`}
+            aria-label="Toggle Dark Mode"
+          >
+            {darkMode ? (
+              <span className="text-2xl">☀️</span>
+            ) : (
+              <span className="text-2xl">🌙</span>
+            )}
+          </button>
+        </div>
       </header>
 
       {/* HERO SECTION */}
       <section className="relative z-10 px-6 md:px-10 mt-16 md:mt-20 flex flex-col items-center text-center">
         
         <div className="relative mb-8">
-          <div className="absolute inset-0 bg-[#7DBA4F] rounded-full blur-2xl opacity-20 animate-pulse"></div>
+          <div className={`absolute inset-0 ${
+            darkMode ? 'bg-[#5A9F3E]' : 'bg-[#7DBA4F]'
+          } rounded-full blur-2xl opacity-20 animate-pulse`}></div>
           <img
             src="/logo.jpg"
             alt="NouCampAnimeArt Logo"
@@ -36,16 +99,22 @@ export default function Home() {
           />
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-[#4A7F2E] drop-shadow-sm leading-tight">
+        <h2 className={`text-4xl md:text-6xl font-extrabold mb-6 ${
+          darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+        } drop-shadow-sm leading-tight`}>
           Refleja tu pasión,<br/>
-          <span className="text-[#7DBA4F]">crea tu mundo</span>
+          <span className={darkMode ? 'text-[#9DD97D]' : 'text-[#7DBA4F]'}>crea tu mundo</span>
         </h2>
 
-        <p className="max-w-2xl text-lg md:text-xl text-gray-700 leading-relaxed mb-4">
+        <p className={`max-w-2xl text-lg md:text-xl ${
+          darkMode ? 'text-gray-300' : 'text-gray-700'
+        } leading-relaxed mb-4`}>
           Desarrollo de páginas web, diseño de logos, ilustraciones personalizadas y productos únicos.
         </p>
         
-        <p className="max-w-xl text-base text-gray-600 mb-8">
+        <p className={`max-w-xl text-base ${
+          darkMode ? 'text-gray-400' : 'text-gray-600'
+        } mb-8`}>
           🎉 <strong>Páginas para eventos de cumpleaños</strong> con precios accesibles
         </p>
 
@@ -81,10 +150,14 @@ export default function Home() {
       {/* SERVICIOS */}
       <section id="servicios" className="px-6 md:px-10 mt-24 md:mt-32 mb-20">
         <div className="text-center mb-12">
-          <h3 className="text-4xl md:text-5xl font-bold text-[#4A7F2E] mb-4">
+          <h3 className={`text-4xl md:text-5xl font-bold ${
+            darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+          } mb-4`}>
             Nuestros Servicios
           </h3>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#7DBA4F] to-[#4A7F2E] mx-auto rounded-full"></div>
+          <div className={`w-24 h-1 bg-gradient-to-r ${
+            darkMode ? 'from-[#7DBA4F] to-[#5A9F3E]' : 'from-[#7DBA4F] to-[#4A7F2E]'
+          } mx-auto rounded-full`}></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -128,24 +201,34 @@ export default function Home() {
           ].map((item, index) => (
             <div
               key={item.title}
-              className="group p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 border-2 border-transparent hover:border-[#7DBA4F] relative overflow-hidden"
+              className={`group p-8 ${
+                darkMode ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white'
+              } rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 border-2 border-transparent hover:border-[#7DBA4F] relative overflow-hidden`}
               style={{animationDelay: `${index * 100}ms`}}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#7DBA4F] to-[#4A7F2E] rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-all duration-300 -translate-y-16 translate-x-16"></div>
+              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${
+                darkMode ? 'from-[#5A9F3E] to-[#3A6F1E]' : 'from-[#7DBA4F] to-[#4A7F2E]'
+              } rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-all duration-300 -translate-y-16 translate-x-16`}></div>
               
               <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
               
-              <h4 className="text-2xl font-bold text-[#4A7F2E] mb-3">
+              <h4 className={`text-2xl font-bold ${
+                darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+              } mb-3`}>
                 {item.title}
               </h4>
               
-              <p className="text-gray-600 mb-3 leading-relaxed">
+              <p className={`${
+                darkMode ? 'text-gray-300' : 'text-gray-600'
+              } mb-3 leading-relaxed`}>
                 {item.desc}
               </p>
               
-              <p className="text-sm text-[#7DBA4F] font-semibold">
+              <p className={`text-sm ${
+                darkMode ? 'text-[#9DD97D]' : 'text-[#7DBA4F]'
+              } font-semibold`}>
                 ✓ {item.highlight}
               </p>
             </div>
@@ -154,12 +237,18 @@ export default function Home() {
       </section>
 
       {/* PRODUCTOS DESTACADOS */}
-      <section id="productos" className="px-6 md:px-10 py-20 bg-gradient-to-r from-[#4A7F2E]/5 to-[#7DBA4F]/5">
+      <section id="productos" className={`px-6 md:px-10 py-20 ${
+        darkMode ? 'bg-gray-800/50' : 'bg-gradient-to-r from-[#4A7F2E]/5 to-[#7DBA4F]/5'
+      }`}>
         <div className="text-center mb-12">
-          <h3 className="text-4xl md:text-5xl font-bold text-[#4A7F2E] mb-4">
+          <h3 className={`text-4xl md:text-5xl font-bold ${
+            darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+          } mb-4`}>
             Productos Destacados
           </h3>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#7DBA4F] to-[#4A7F2E] mx-auto rounded-full"></div>
+          <div className={`w-24 h-1 bg-gradient-to-r ${
+            darkMode ? 'from-[#7DBA4F] to-[#5A9F3E]' : 'from-[#7DBA4F] to-[#4A7F2E]'
+          } mx-auto rounded-full`}></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -171,14 +260,20 @@ export default function Home() {
           ].map((product) => (
             <div
               key={product.title}
-              className="p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-6"
+              className={`p-8 ${
+                darkMode ? 'bg-gray-800' : 'bg-white'
+              } rounded-3xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-6`}
             >
               <div className="text-6xl">{product.icon}</div>
               <div className="flex-1">
-                <h4 className="text-2xl font-bold text-[#4A7F2E] mb-2">
+                <h4 className={`text-2xl font-bold ${
+                  darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+                } mb-2`}>
                   {product.title}
                 </h4>
-                <p className="text-xl text-[#7DBA4F] font-semibold">
+                <p className={`text-xl ${
+                  darkMode ? 'text-[#9DD97D]' : 'text-[#7DBA4F]'
+                } font-semibold`}>
                   {product.price}
                 </p>
               </div>
@@ -189,10 +284,14 @@ export default function Home() {
 
       {/* CONTACTO */}
       <section id="contacto" className="px-6 md:px-10 py-20 text-center">
-        <h3 className="text-4xl md:text-5xl font-bold text-[#4A7F2E] mb-6">
+        <h3 className={`text-4xl md:text-5xl font-bold ${
+          darkMode ? 'text-[#7DBA4F]' : 'text-[#4A7F2E]'
+        } mb-6`}>
           ¿Listo para crear algo único?
         </h3>
-        <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+        <p className={`text-xl ${
+          darkMode ? 'text-gray-300' : 'text-gray-700'
+        } mb-8 max-w-2xl mx-auto`}>
           Contáctanos hoy y hagamos realidad tu proyecto con precios accesibles y calidad profesional
         </p>
         
@@ -201,7 +300,9 @@ export default function Home() {
             href="https://wa.me/525645689216"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-10 py-5 bg-gradient-to-r from-[#7DBA4F] to-[#4A7F2E] text-white font-bold text-xl rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all flex items-center gap-3"
+            className={`px-10 py-5 bg-gradient-to-r ${
+              darkMode ? 'from-[#7DBA4F] to-[#5A9F3E]' : 'from-[#7DBA4F] to-[#4A7F2E]'
+            } text-white font-bold text-xl rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all flex items-center gap-3`}
           >
             <span className="text-3xl">💬</span>
             Chatea con nosotros
@@ -211,14 +312,14 @@ export default function Home() {
         <div className="mt-12 flex justify-center gap-6">
           <button 
             disabled
-            className="w-14 h-14 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-2xl opacity-70 cursor-not-allowed shadow-lg"
+            className={`w-14 h-14 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-2xl opacity-70 cursor-not-allowed shadow-lg`}
             title="Próximamente"
           >
             f
           </button>
           <button 
             disabled
-            className="w-14 h-14 rounded-full bg-gradient-to-br from-[#E4405F] to-[#C13584] text-white flex items-center justify-center text-2xl opacity-70 cursor-not-allowed shadow-lg"
+            className={`w-14 h-14 rounded-full bg-gradient-to-br from-[#E4405F] to-[#C13584] text-white flex items-center justify-center text-2xl opacity-70 cursor-not-allowed shadow-lg`}
             title="Próximamente"
           >
             📷
@@ -227,7 +328,9 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 bg-[#4A7F2E] text-white text-center">
+      <footer className={`py-8 ${
+        darkMode ? 'bg-gray-900' : 'bg-[#4A7F2E]'
+      } text-white text-center transition-colors duration-300`}>
         <p className="text-lg font-semibold mb-2">NouCampAnimeArt</p>
         <p className="text-sm opacity-90">© 2024 - Todos los derechos reservados</p>
         <p className="text-sm mt-2">📱 WhatsApp: 564-568-9216</p>
