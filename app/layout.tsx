@@ -12,12 +12,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Nou Camp AnimeArt",
-  description: "Nou Camp AnimeArt",
-  icons: {
-    icon: "/favicon-new.ico",
+export const metadata = {
+  title: "Nou Camp Anime Art",
+  description: "Nou Camp Anime Art",
+  openGraph: {
+    title: "Nou Camp Anime Art",
+    description: "Nou Camp Anime Art",
+    url: "https://nou-camp-anime-art.vercel.app/",
+    siteName: "Nou Camp Anime Art",
+    images: [
+      {
+        url: "https://nou-camp-anime-art.vercel.app/favicon-new.ico",
+        width: 1200,
+        height: 630,
+        alt: "Nou Camp Anime Art"
+      }
+    ],
+    locale: "es_MX",
+    type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nou Camp Anime Art",
+    description: "Nou Camp Anime Art",
+    images: ["https://nou-camp-anime-art.vercel.app/favicon-new.ico"],
+  },
+  icons: {
+    icon: "/favicon-new.ico"
+  }
 };
 
 export default function RootLayout({
