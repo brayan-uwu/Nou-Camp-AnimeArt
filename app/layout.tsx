@@ -22,7 +22,7 @@ export const metadata = {
     siteName: "Nou Camp Anime Art",
     images: [
       {
-        url: "https://nou-camp-anime-art.vercel.app/favicon-new.ico",
+        url: "https://nou-camp-anime-art.vercel.app/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Nou Camp Anime Art"
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Nou Camp Anime Art",
     description: "Nou Camp Anime Art",
-    images: ["https://nou-camp-anime-art.vercel.app/favicon-new.ico"],
+    images: ["https://nou-camp-anime-art.vercel.app/logo.jpg"],
   },
   icons: {
     icon: "/favicon-new.ico"
