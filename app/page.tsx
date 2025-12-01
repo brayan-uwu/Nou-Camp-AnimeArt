@@ -9,7 +9,11 @@ export default function Home() {
       {/* HEADER */}
       <header className="w-full px-6 md:px-10 py-6 flex items-center justify-between z-20 relative backdrop-blur-sm bg-white/70 shadow-sm">
         <h1 className="text-2xl md:text-3xl font-extrabold text-[#4A7F2E] tracking-wide flex items-center gap-2">
-          <span className="text-4xl">🎨</span>
+          <img
+            src="/logo.jpg"
+            alt="NouCampAnimeArt Logo"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shadow-md"
+          />
           NouCampAnimeArt
         </h1>
 
