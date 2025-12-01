@@ -161,7 +161,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {[
             { title: "Arte Digital Premium", price: "Desde $299", icon: "🎨" },
-            { title: "Páginas de Cumpleaños", price: "Desde 299", icon: "🎂" },
+            { title: "Páginas de Cumpleaños", price: "Desde $299", icon: "🎂" },
             { title: "Logos Profesionales", price: "Desde $399", icon: "✨" },
             { title: "Productos Personalizados", price: "Desde $149", icon: "🛍️" },
           ].map((product) => (
