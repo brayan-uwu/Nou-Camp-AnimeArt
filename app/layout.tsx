@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     images: ["https://nou-camp-anime-art.vercel.app/logo.png"],
   },
   icons: {
-    icon: "/favicon-new.ico"
+    icon: "/icon.ico",
   }
 };
 
